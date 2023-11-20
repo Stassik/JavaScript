@@ -1,4 +1,4 @@
-"use strict";
+
 
 /*
 1. Необходимо вывести в консоль массив продуктов в котором есть хоть одна
@@ -9,7 +9,7 @@
 Если сложно работать с методами массива, то можно сделать и обычным циклом.
 */
 
-const products = [
+const product = [
   {
     id: 3,
     price: 127,
@@ -31,4 +31,19 @@ const products = [
   },
 ];
 
-// Здесь пишем решение, данный комментарий необходимо стереть.
+const newProductArr = product.filter((num) => num.photos && num.photos.length > 0);
+console.log(newProductArr);
+
+product.sort((num1, num2) => {
+  if (num1.price > num2.price) {
+    return 1;
+  }
+  if (num1.price < num2.price) {
+    return -1;
+  }
+  if (num1.price === num2.price) {
+    return 0;
+  }
+});
+
+console.log(product);
