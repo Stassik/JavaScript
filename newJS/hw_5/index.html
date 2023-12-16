@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>HW 5</title>
+</head>
+
+<body>
+    <div class="content"></div>
+
+    <script src="data.js"></script>
+    <script>
+        const productsData = JSON.parse(dataProducts);
+        const contentEl = document.querySelector('.content');
+
+        productsData.map(function (value) {
+
+            let productEl = document.createElement('div');
+            productEl.classList.add('product');
+            let headingEl = document.createElement('h3');
+            headingEl.textContent = value.title;
+            let imgEl = document.createElement('img');
+            imgEl.classList.add('product__img');
+            imgEl.src = value.url;
+            imgEl.alt = value.alt;
+            let textEL = document.createElement('p');
+            textEL.textContent = value.text;
+            productEl.appendChild(headingEl);
+            productEl.appendChild(imgEl);
+            productEl.appendChild(textEL);
+            contentEl.appendChild(productEl);
+
+        });
+
+    </script>
+</body>
+
+</html>

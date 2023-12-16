@@ -1,0 +1,21 @@
+.content {
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    padding: 16px;
+    border: 1px solid #ddd;
+}
+
+.product__img {
+    width: 100%;
+    aspect-ratio: auto;
+}
