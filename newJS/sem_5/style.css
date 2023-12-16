@@ -36,7 +36,7 @@ video[poster] {
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: inset 0px -37px 11px -10px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0px -37px 11px -10px rgba(12,16,51, 0.6);
     transition: bottom .3s ease-in-out;
 }
 
