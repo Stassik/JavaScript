@@ -2,19 +2,15 @@
  * Задание 1: ""Управление библиотекой книг""
 
 Реализуйте класс Book, представляющий книгу, со следующими свойствами и методами:
-
 Свойство title (название) - строка, название книги.
 Свойство author (автор) - строка, имя автора книги.
 Свойство pages (количество страниц) - число, количество страниц в книге.
 Метод displayInfo() - выводит информацию о книге (название, автор и количество страниц).
-
 */
+
 class Book {
-    title;
-    author;
-    pages;
     displayInfo() {
-        console.log(`Название: ${this.title} Автор: ${this.author} Количество страниц: ${this.pages}`);
+        console.log(`Название: ${this.title} | Автор: ${this.author} | Количество страниц: ${this.pages}`);
     }
     constructor(title, author, pages) {
         this.title = title;
@@ -50,15 +46,10 @@ student2.displayInfo();
 // Вывод:
 // Name: Jane Doe
 // Age: 17
-// Grade: 11th grade"
- * 
- * 
- */
+// Grade: 11th grade" 
+*/
 
 class Student {
-    name;
-    age;
-    grade;
     displayInfo() {
         console.log(
             `Name: ${this.name}\nAge: ${this.age}\nGrade: ${this.grade}\n`
