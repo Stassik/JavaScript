@@ -1,0 +1,269 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar 3</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Задание 1 (тайминг 20 минут)
+            Напишите функцию getPrototypeChain(obj), которая будет
+            возвращать цепочку прототипов для заданного объекта
+            obj. Функция должна вернуть массив прототипов, начиная
+            от самого объекта и заканчивая глобальным объектом
+            Object.prototype.
+        */
+
+        const proto = getPrototypeChain({ name: "John" });
+        console.log(proto);
+
+        function getPrototypeChain(obj) {
+            let currentObject = obj;
+            const arrObj = [currentObject];
+            while (currentObject != null) {
+                currentObject = Object.getPrototypeOf(currentObject);
+                arrObj.push(currentObject);
+            }
+            return arrObj;
+        }
+
+        /*
+        Задание 2 (20минут)
+            Напишите конструктор объекта Person, который принимает два аргумента:
+            name (строка) и age (число). Конструктор должен создавать объект с
+            указанными свойствами name и age и методом introduce(), который
+            выводит в консоль строку вида "Меня зовут [name] и мне [age] лет.".
+            // Пример:
+            const person1 = new Person("John", 25);
+            person1.introduce(); // Вывод: Меня зовут John и мне 25 лет.
+        */
+
+        class Person {
+            introduce() {
+                console.log(`Меня зовут ${this.name} и мне ${this.age} лет.`)
+            }
+            constructor(name, age) {
+                this.name = name;
+                this.age = age
+            }
+        }
+
+        const person1 = new Person("John", 25);
+        person1.introduce();
+
+        /*
+        Задание 4 (Class 30 минут)
+            Создайте класс Animal, который будет представлять животное. У
+            класса Animal должны быть следующие свойства и методы:
+            ● Свойство name (строка) - имя животного.
+            ● Метод speak() - выводит в консоль звук, издаваемый животным.
+            Создайте подкласс Dog, который наследует класс Animal. Для
+            подкласса Dog добавьте дополнительное свойство и метод:
+            ● Свойство breed (строка) - порода собаки.
+            ● Метод fetch() - выводит в консоль сообщение "Собака [name]
+            принесла мяч.".
+            
+            Пример:
+            const animal1 = new Animal("Животное");
+            animal1.speak(); // Вывод: Животное издает звук.
+            const dog1 = new Dog("Бобик", "Дворняжка");
+            dog1.speak(); // Вывод: Животное Бобик издает звук.
+            console.log(dog1.breed); // Вывод: Дворняжка
+            dog1.fetch(); // Вывод: Собака Бобик принесла мяч.
+        
+        */
+
+
+        class Animal {
+            speak() {
+                console.log(this.name + ' издает звук');
+            }
+
+            constructor(name) {
+                this.name = name;
+            }
+        }
+
+        class Dog extends Animal {
+            fetch() {
+                console.log(`Собака ${this.name} принесла мяч.`);
+            }
+            constructor(name, breed) {
+                super();
+                this.name = name;
+                this.breed = breed;
+            }
+        }
+
+        const animal1 = new Animal("Животное");
+        animal1.speak(); // Вывод: Животное издает звук.
+        const dog1 = new Dog("Бобик", "Дворняжка");
+        dog1.speak(); // Вывод: Животное Бобик издает звук.
+        console.log(dog1.breed); // Вывод: Дворняжка
+        dog1.fetch(); // Вывод: Собака Бобик принесла мяч.
+
+
+
+
+        /**
+         * Создать класс "Калькулятор" с приватными полями "последний результат" и "текущее значение". 
+         * Класс должен иметь публичные методы "сложить", "вычесть", "умножить" и "разделить", 
+         * которые будут изменять значение текущего значения в соответствии с выбранной операцией. 
+         * Также класс должен иметь статическое поле "точность", которое будет задавать количество знаков после запятой при выводе результата.
+         */
+
+        class Calculator {
+            #lastResult = 0;
+            #value = 0;
+            static accuracy = 2;
+
+            #round(num) {
+                return num.toFixed(Calculator.accuracy);
+            }
+
+
+            getValue() {
+                return this.#round(this.#value);
+            }
+
+            sum(num) {
+                this.#lastResult = this.#value;
+                this.#value += num;
+            }
+            diff(num) {
+                this.#lastResult = this.#value;
+                this.#value -= num;
+            }
+
+            mult(num) {
+                this.#lastResult = this.#value;
+                this.#value *= num;
+            }
+
+            div(num) {
+                if (num === 0) {
+                    throw new Error('На ноль делить нельзя');
+                    //console.error('На ноль делить нельзя');
+                }
+                this.#lastResult = this.#value;
+                this.#value /= num;
+            }
+        }
+
+        const Calc = new Calculator();
+        console.log(Calc);
+        Calc.sum(4);
+        console.log(Calc.getValue());
+        Calc.sum(4);
+        console.log(Calc.getValue());
+        Calc.diff(6);
+        console.log(Calc.getValue());
+        Calc.mult(6);
+        console.log(Calc.getValue());
+        Calc.div(6);
+        console.log(Calc.getValue());
+
+
+
+        /*
+        Создать класс "Пользователь" с приватными полями "имя", "возраст" и "электронная почта". 
+        Класс должен иметь публичные методы "изменить имя", "изменить возраст" и "изменить электронную почту", которые будут изменять соответствующие поля объекта. 
+        Также класс должен иметь статическое поле "максимальный возраст", которое будет задавать максимально допустимый возраст для всех создаваемых объектов.
+        */
+
+        class User {
+            #name;
+            #age;
+            #email;
+            maxAge = 18;
+
+            getName() {
+                console.log(this.#name);
+            }
+            getAge() {
+                console.log(this.#age);
+            }
+            rename(newName) {
+                this.#name = newName;
+            }
+            changeAge(newAge) {
+                if (newAge <= this.maxAge) {
+                    this.#age = newAge;
+                } else {
+                    this.#age = this.maxAge;
+                }
+
+            }
+            changeEmail(newEmail) {
+                this.#email = newEmail;
+            }
+        }
+
+        const user1 = new User();
+        user1.changeAge(10);
+        user1.rename('anita');
+        user1.changeAge(25);
+        user1.getName();
+        user1.getAge();
+
+
+        /**
+         * Создать класс "Товар" с приватными полями "название", "цена" и "количество". 
+         * Класс должен иметь публичные методы "изменить цену", "изменить количество" и "получить стоимость", 
+         * которые будут изменять соответствующие поля объекта и возвращать стоимость товара соответственно. 
+         * Также класс должен иметь статическое поле "максимальное количество", которое будет задавать максимально допустимое количество товара для всех создаваемых объектов.
+         *
+        */
+
+        class Product {
+            #name;
+            #price;
+            #count;
+            static maxCount = 10;
+
+
+            constructor(name, price, count) {
+                this.#name = name;
+                this.#price = price;
+
+                if (count <= Product.maxCount) {
+                    this.#count = count;
+                } else {
+                    this.#count = Product.maxCount;
+                }
+            }
+
+            changePrice(newPrice) {
+                this.#price = newPrice;
+            }
+
+            changeCount(newCount) {
+                if (newCount <= Product.maxCount) {
+                    this.#count = newCount;
+                } else {
+                    this.#count = Product.maxCount;
+                }
+            }
+
+            getPrice() {
+                console.log(this.#price);
+            }
+            getCount() {
+                console.log(this.#count);
+            }
+        }
+
+        const product1 = new Product('кофе', 400, 2);
+        const product2 = new Product('вино', 900, 20);
+
+        product1.getPrice();
+        product1.getCount();
+        product2.getPrice()
+        product2.getCount();
+    </script>
+</body>
+
+</html>
