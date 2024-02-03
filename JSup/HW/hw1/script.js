@@ -133,7 +133,6 @@ const clientsArray = [];
 clientsArray.push(client1);
 clientsArray.push(client2);
 clientsArray.push(client3);
-console.log(clientsArray);
 
 
 clientsArray.forEach(client => {
