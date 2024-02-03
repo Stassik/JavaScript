@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<div class="">El1</div>
+<div data-active="true">El2</div>
+<div class="">El3</div>
+<div data-active="true">El4</div>
+
+<body>
+    <script>
+        // Задание 1 (тайминг 20 минут)
+        // Создать механизм для безопасного добавления метаданных к
+        // объектам книг с использованием Symbol.
+        // 1. Создать уникальные символы для метаданных: отзывы,
+        // рейтинг, теги.
+        // 2. Реализовать функции addMetadata (добавление метаданных)
+        // и getMetadata (получение метаданных).
+        // 3. Создать объект книги, добавить метаданные и вывести их на
+        // консоль.
+
+        const reviewSymbol = Symbol('review');
+        const ratingSymbol = Symbol('rating');
+        const tagsSymbol = Symbol('tags');
+
+
+        function addMetadata(book, metadataType, data) {
+            book[metadataType] = data;
+        };
+        function getMetadata(book, metadataType) {
+            return book[metadataType];
+        };
+
+
+        let book = {
+            title: "1984",
+            author: "George Orwell"
+        };
+
+        addMetadata(book, reviewSymbol, "Отличная книга");
+        addMetadata(book, ratingSymbol, 5);
+        addMetadata(book, tagsSymbol, "distopia");
+        console.log(getMetadata(book, ratingSymbol));
+
+
+
+        /*
+        Используя Symbol.iterator, создайте объект "Библиотека", который можно
+итерировать. Каждая итерация должна возвращать следующую книгу из библиотеки.
+1. Создайте объект library, который содержит массив книг и имеет свойство-
+символ Symbol.iterator.
+2. Реализуйте кастомный итератор для объекта library. Итератор должен
+перебирать книги по порядку.
+3. Используйте цикл for...of для перебора книг в библиотеке и вывода их на
+консоль.
+        */
+
+        const books = [
+            { title: "1984", author: "George Orwell" },
+            { title: "Brave New World", author: "Aldous Huxley" },
+            { title: "Fahrenheit 451", author: "Ray Bradbury" }
+        ];
+
+
+        const library = {
+            books: [...books],
+            [Symbol.iterator]: function () {
+                let counter = 0;
+                return {
+                    next: (() => {
+                        if (counter < this.books.length) {
+                            return { value: this.books[counter++], done: false }
+                        } else {
+                            return { done: true };
+                        }
+                    })
+                }
+            }
+        };
+
+        for (const book of library) {
+            console.log(book.title + ' | ' + book.author);
+        }
+
+
+        /*
+        Задание 3 (тайминг 15 минут)
+        Часто при работе с DOM мы сталкиваемся с коллекциями элементов, которые не являются стандартными
+        массивами, но похожи на них. Однако у таких коллекций нет методов массива, и здесь на помощь приходит
+        Array.from. В этом задании вы научитесь конвертировать коллекции DOM-элементов в массивы и работать
+        с ними.
+        Напишите функцию, которая собирает все элементы <div> на странице, преобразует их в массив и
+        фильтрует только те из них, у которых есть атрибут data-active.
+        Выведите результат на консоль.
+        */
+
+        function getEl() {
+            const arrayEl = Array.from(document.querySelectorAll('div'));
+            const newArray = arrayEl.filter(div => {
+                return div.hasAttribute("data-active");
+            });
+            return newArray;
+        }
+        console.log(getEl());
+
+
+        /*
+        Текст задания:
+        Представьте себе ситуацию: у нас есть группа студентов, и мы хотим отследить, кто из них посетил какие уроки и кто из преподавателей вёл данные уроки.
+        Map будет использоваться для хранения соответствия между уроком и преподавателем.
+        Set будет использоваться для хранения уникальных уроков, которые посетил каждый студент.
+            // 1. Map: урок => преподаватель
+            let lessons = new Map();
+            // "Математика", "Смирнов"
+            // "История", "Иванова"
+
+
+            // 2. Map: студент => Set уроков
+
+
+           
+        
+        
+        */
+
+
+        let lessons = new Map();
+        lessons.set('Математика', 'Смирнов');
+        lessons.set('История', 'Иванова');
+
+        const student = {
+            name: 'Иван'
+        }
+        const studentLesons = new Set();
+        studentLesons.add('Математика');
+        studentLesons.add('История');
+
+
+        let students = new Map();
+        students.set(student, studentLesons);
+
+        // Проверка:
+        console.log(`Преподаватель по Математике: ${lessons.get("Математика")}`); // Смирнов
+        console.log(`Уроки Ивана: ${[...students.get(student)]}`); // Математика, История
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

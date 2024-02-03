@@ -1,26 +1,26 @@
-// const url = "https://www.boredapi.com/api/activity/";
-// const btnEl = document.querySelector('.btn');
+const url = "https://www.boredapi.com/api/activity/";
+const btnEl = document.querySelector('.btn');
 
 
 
-// Промисы
+Промисы
 
-// btnEl.addEventListener('click', function () {
-//     fetch(url)
-//         .then((response) => response.json())
-//         .then((json) => {
-//             const data = json;
-//             getActivity(data);
-//         }).catch((error) => console.log('ошибка'));
-// });
+btnEl.addEventListener('click', function () {
+    fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+            const data = json;
+            getActivity(data);
+        }).catch((error) => console.log('ошибка'));
+});
 
 
 
-// function getActivity(data) {
-//     const divEl = document.createElement('div');
-//     divEl.textContent = data.activity;
-//     document.body.appendChild(divEl);
-// }
+function getActivity(data) {
+    const divEl = document.createElement('div');
+    divEl.textContent = data.activity;
+    document.body.appendChild(divEl);
+}
 
 
 // Ассинхрон
