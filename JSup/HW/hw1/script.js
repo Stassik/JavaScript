@@ -70,82 +70,140 @@ for (const album of musicCollection) {
 Используйте коллекции Map для хранения блюд и их поваров, а также для хранения заказов каждого клиента. В качестве ключей для клиентов используйте объекты.
 
 */
-class Chef {
-    constructor(name, spec) {
-        this.name = name;
-        this.spec = spec;
-        this.dishes = new Set();
-    }
-    getSpec() {
-        return this.spec;
-    }
-    getName() {
-        return this.name;
-    }
-    getDishes() {
-        return this.dishes;
-    }
-}
 
-//Добавили поваров, их специализации и блюда
+let chefsList = new Map();
+chefsList.set("Виктор", "Пицца");
+chefsList.set("Ольга", "Суши");
+chefsList.set("Дмитрий", "Десерты");
 
-const chef1 = new Chef('Виктор', 'Пицца');
-chef1.dishes.add('Маргарита');
-chef1.dishes.add('Пеперони');
-const chef2 = new Chef('Ольга', 'Суши');
-chef2.dishes.add('Филадельфия');
-chef2.dishes.add('Калифорния');
-const chef3 = new Chef('Дмитрий', 'Десерт');
-chef3.dishes.add('Тирамису');
-chef3.dishes.add('Чизкейк');
 
-const chefsArray = [];
-chefsArray.push(chef1);
-chefsArray.push(chef2);
-chefsArray.push(chef3);
 
-class Client {
-    constructor(name) {
-        this.name = name;
-        this.order = new Map();
-    }
+let dishes = new Map();
+dishes.set("Пицца", new Set(["Маргарита", "Пепперони"]));
+dishes.set("Суши", new Set(["Калифорния", "Филадельфия"]));
+dishes.set("Десерты", new Set(["Чизкейк", "Тирамису"]));
 
-    getName() {
-        return this.name;
-    }
-    getOrder() {
-        return this.order;
-    }
+
+
+for (const dishesItem of dishes.entries()) {
+    for (const chef of chefsList.entries()) {
+        if (dishesItem[0] === chef[1]) {
+            dishesItem[1].forEach(item => {
+                console.log(`Блюдо "${item}" готовит ${chef[0]}"`);
+            });
+        };
+    };
+};
+
+
+
+let orders = new Map();
+orders.set({ name: "Алексей" }, [{ name: "Пепперони", type: "Пицца" }, { name: "Тирамису", type: "Десерты" }])
+orders.set({ name: "Мария" }, [{ name: "Калифорния", type: "Суши" }, { name: "Маргарита", type: "Пицца" }])
+orders.set({ name: "Ирина" }, [{ name: "Чизкейк", type: "Десерты" }]);
+
+
+for (const ordersItem of orders.entries()) {
+    console.log(`Клиент ${ordersItem[0].name} заказал:`);
+    ordersItem[1].forEach(dishes => {
+        console.log(`${dishes.type} "${dishes.name}"`);
+    });
+    console.log("_________________________________");
+
+
 }
 
 
-const client1 = new Client('Алексей');
-client1.order.set('Пицца', 'Пеперони');
-client1.order.set('Десерт', 'Тирамису');
-const client2 = new Client('Мария');
-client2.order.set('Суши', 'Калифорния');
-client2.order.set('Пицца', 'Маргарита');
-const client3 = new Client('Ирина');
-client3.order.set('Десерт', 'Чизкейк');
 
 
-const clientsArray = [];
-clientsArray.push(client1);
-clientsArray.push(client2);
-clientsArray.push(client3);
 
 
-clientsArray.forEach(client => {
-    console.log(`Клиент ${client.getName()} заказал: `);
-    for (let typeDish of client.getOrder().entries()) {
-        console.log(`${typeDish[0]} - ${typeDish[1]}`);
-        chefsArray.forEach(chef => {
-            if (chef.getSpec() === typeDish[0]) {
-                console.log('повар: ' + chef.getName());
-            };
-        });
-    }
-});
+
+
+
+
+
+
+
+
+
+
+// class Chef {
+//     constructor(name, spec) {
+//         this.name = name;
+//         this.spec = spec;
+//         this.dishes = new Set();
+//     }
+//     getSpec() {
+//         return this.spec;
+//     }
+//     getName() {
+//         return this.name;
+//     }
+//     getDishes() {
+//         return this.dishes;
+//     }
+// }
+
+// //Добавили поваров, их специализации и блюда
+
+// const chef1 = new Chef('Виктор', 'Пицца');
+// chef1.dishes.add('Маргарита');
+// chef1.dishes.add('Пеперони');
+// const chef2 = new Chef('Ольга', 'Суши');
+// chef2.dishes.add('Филадельфия');
+// chef2.dishes.add('Калифорния');
+// const chef3 = new Chef('Дмитрий', 'Десерт');
+// chef3.dishes.add('Тирамису');
+// chef3.dishes.add('Чизкейк');
+
+// const chefsArray = [];
+// chefsArray.push(chef1);
+// chefsArray.push(chef2);
+// chefsArray.push(chef3);
+
+// class Client {
+//     constructor(name) {
+//         this.name = name;
+//         this.order = new Map();
+//     }
+
+//     getName() {
+//         return this.name;
+//     }
+//     getOrder() {
+//         return this.order;
+//     }
+// }
+
+
+// const client1 = new Client('Алексей');
+// client1.order.set('Пицца', 'Пеперони');
+// client1.order.set('Десерт', 'Тирамису');
+// const client2 = new Client('Мария');
+// client2.order.set('Суши', 'Калифорния');
+// client2.order.set('Пицца', 'Маргарита');
+// const client3 = new Client('Ирина');
+// client3.order.set('Десерт', 'Чизкейк');
+
+
+// const clientsArray = [];
+// clientsArray.push(client1);
+// clientsArray.push(client2);
+// clientsArray.push(client3);
+
+
+// clientsArray.forEach(client => {
+//     console.log(`Клиент ${client.getName()} заказал: `);
+//     for (let typeDish of client.getOrder().entries()) {
+//         console.log(`${typeDish[0]} - ${typeDish[1]}`);
+//         chefsArray.forEach(chef => {
+//             if (chef.getSpec() === typeDish[0]) {
+//                 console.log('повар: ' + chef.getName());
+//             };
+//         });
+//     }
+// });
 
 /*
 
