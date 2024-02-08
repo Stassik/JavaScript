@@ -4,12 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>HW 2</title>
 </head>
 
 <body>
+    <div class="container">
+        <h2 class="feedback__title">Отзывы</h2>
+        <ul class="feedback__box">
+        </ul>
+        <form class="feedback__form" action="#" onsubmit="return false">
+            <label class="feedback__title form__label" for="feedback-text">Оставить отзыв</label>
+            <textarea class="form__input" name="feedback-text" id="feedback-text" cols="30" rows="10"></textarea>
+            <button class="form__btn" type="submit">Отправить</button>
+        </form>
+        <div class="message"></div>
+    </div>
 
     <script src="script.js"></script>
+    <script src="script2.js"></script>
 </body>
 
 </html>

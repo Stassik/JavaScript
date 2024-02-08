@@ -8,6 +8,12 @@
 </head>
 
 <body>
+  <form action="" onsubmit="return false">
+    <input type="text" name="number" id="num">
+    <button type="submit">Отправить</button>
+  </form>
+  <div class="messege"></div>
+
   <script>
     /*
     Давайте создадим класс для управления банковским счетом. В этом классе будет приватное
@@ -83,7 +89,7 @@
     Опциональную цепочку вызовов методов и оператор нулевого слияния.
     4. В функции getAccountInfo используйте instanceof для проверки типа переданного
     пользователя и дайте соответствующий ответ.
-    
+
     */
 
     class User {
@@ -114,6 +120,36 @@
     console.log(getAccountInfo(user1));
 
 
+    /*
+    Вы создаете интерфейс, где пользователь вводит число.
+Ваша задача — проверить, является ли введенное значение числом или нет, и дать
+соответствующий ответ.
+1. Создайте HTML-структуру: текстовое поле для ввода числа и кнопку
+"Проверить".
+2. Добавьте место (например, div) для вывода сообщения пользователю.
+3. Напишите функцию, которая будет вызвана при нажатии на кнопку. Эта функция
+должна использовать try и catch для проверки вводимого значения.
+    
+    */
+
+    const button = document.querySelector('button');
+    const messegeEl = document.querySelector('.messege');
+    const inputEl = document.querySelector('input');
+
+
+
+
+    function validation() {
+      try {
+        if (isNaN(Number(inputEl.value)) || inputEl.value.length === 0) {
+          throw new Error("Не число");
+        }
+        messegeEl.textContent = "Отправлено";
+      } catch (error) {
+        messegeEl.textContent = error.message;
+      }
+    }
+    button.addEventListener("click", validation);
 
 
 
