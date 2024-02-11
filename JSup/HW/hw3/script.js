@@ -59,16 +59,11 @@ function generateItemElements(data) {
         </li>
         `);
     }
-}
-
-async function waitUntilProductsLoaded(url) {
-    await getProducts(url);
-
     const itemsProduct = listProductsEl.querySelectorAll('.products__item');
     addBtnEvent(itemsProduct);
+
 }
 
-waitUntilProductsLoaded(url);
 
 function addBtnEvent(itemsProduct) {
     itemsProduct.forEach(item => {
@@ -127,3 +122,8 @@ overlay.addEventListener('click', () => {
     overlay.style.display = 'none';
     modal.style.display = 'none';
 });
+
+
+getProducts(url);
+
+
