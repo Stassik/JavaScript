@@ -1,0 +1,13 @@
+ul {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.product__item {
+    width: 100%;
+    max-width: 300px;
+    padding: 30px;
+    border: 1px solid #747346;
+}
