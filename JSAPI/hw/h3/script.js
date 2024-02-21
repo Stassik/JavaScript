@@ -123,7 +123,6 @@ function addLikeToPhoto(data, btn, likes) {
 
     let likedByUser = data.liked_by_user;
     let likesCounter = data.likes;
-    console.log(btn);
     if (!likedByUser) {
         likesCounter++;
         data.liked_by_user = true;
@@ -133,9 +132,7 @@ function addLikeToPhoto(data, btn, likes) {
         data.liked_by_user = false;
         btn.classList.remove('added');
     }
-    console.log(likes.textContent);
     likes.textContent = likesCounter;
-    console.log(likes.textContent);
     data.likes = likesCounter;
     addPhotoToLocalStorage(dataPhotos);
 
